@@ -222,6 +222,11 @@ const grandTotal =subtotal + deliveryFee+platFormFee;
         <h1 className="text-3xl font-bold px-5 py-2 text-yellow-800">select Address</h1>
         <div>
           {
+           loadingAddress ? (
+             <div className="flex items-center gap-2 px-5 py-3 text-gray-500">
+               <BiLoader className="animate-spin" /> Loading addresses...
+             </div>
+           ) : (
            addresses.map((add)=>{
              const isSelected= selectedAddress===add._id
             return( 
@@ -236,7 +241,8 @@ const grandTotal =subtotal + deliveryFee+platFormFee;
           
             </label>
             )
-           }) 
+           })
+           )
           }
         </div>
       
@@ -308,14 +314,14 @@ const grandTotal =subtotal + deliveryFee+platFormFee;
         </div>
 
       <div className="w-[60vw] h-10 flex items-center justify-center rounded-xl shadow-sm border m-2 font-bold text-md bg-blue-400 duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
-    <button disabled={loadingRazorpay} onClick={payWithRazorPay}>
-       {loadingRazorpay && <BiLoader className="animate-spin" />}
+    <button disabled={loadingRazorpay||creatingOrder} onClick={payWithRazorPay}>
+       {(loadingRazorpay||creatingOrder) && <BiLoader className="animate-spin" />}
       PROCEED WITH RAZORPAY</button>
     </div>
 
 <div className="w-[60vw] h-10 flex items-center justify-center rounded-xl shadow-sm border font-bold text-md m-2 bg-gray-400 duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
-  {loadingStripe && <BiLoader className="animate-spin" />}
-    <button disabled={loadingStripe} onClick={payWithStripe}>PROCEED WITH STRIPE</button>
+  {(loadingStripe||creatingOrder) && <BiLoader className="animate-spin" />}
+    <button disabled={loadingStripe||creatingOrder} onClick={payWithStripe}>PROCEED WITH STRIPE</button>
 </div>
        </div>
   
