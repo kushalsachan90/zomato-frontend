@@ -18,15 +18,13 @@ const AdminDashboard = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             })
-              console.log(response.data.restaurant,"restaurant data")
-            setRestaurant(response.data.restaurant,)
-     
+            setRestaurant(response.data.restaurant)
+
             const response2 = await api.get(`${AdminService}/api/admin/rider/pending`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             })
-            console.log(response2.data.rider,"response-rider")
             setrider(response2.data.rider)
         } catch (error) {
             console.log(error);
@@ -119,14 +117,35 @@ const AdminDashboard = () => {
                                     key={item._id}
                                     className="flex items-center justify-between rounded-xl border border-gray-200 bg-white px-5 py-4"
                                 >
-                                    <div>
-                                        <p className="text-sm font-medium text-gray-900">{item.name}</p>
-                                        {"address" in item && item.address && (
-                                            <p className="mt-0.5 text-xs text-gray-500">{item.address}</p>
+                                    <div className="flex items-center gap-3">
+                                        {tab === "rider" && item.picture && (
+                                            <img
+                                                src={item.picture}
+                                                alt={item.riderName}
+                                                className="h-10 w-10 rounded-full object-cover"
+                                            />
                                         )}
-                                        {item.phone && (
-                                            <p className="mt-0.5 text-xs text-gray-500">{item.phone}</p>
-                                        )}
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-900">
+                                                {tab === "restaurant" ? item.name : item.riderName}
+                                            </p>
+
+                                            {tab === "restaurant" && item.description && (
+                                                <p className="mt-0.5 text-xs text-gray-500">{item.description}</p>
+                                            )}
+
+                                            {tab === "restaurant" && item.autoLocation?.formattedAddress && (
+                                                <p className="mt-0.5 text-xs text-gray-500">{item.autoLocation.formattedAddress}</p>
+                                            )}
+
+                                            {tab === "restaurant" && item.phone && (
+                                                <p className="mt-0.5 text-xs text-gray-500">{item.phone}</p>
+                                            )}
+
+                                            {tab === "rider" && item.phoneNumber && (
+                                                <p className="mt-0.5 text-xs text-gray-500">{item.phoneNumber}</p>
+                                            )}
+                                        </div>
                                     </div>
 
                                     <button
