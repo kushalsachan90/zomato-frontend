@@ -2,6 +2,7 @@ import type { IOrder } from "../types"
 import { useState, useEffect } from "react"
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
 import * as L from "leaflet"
+;(window as any).L = L  
 import "leaflet/dist/leaflet.css"
 import "leaflet-routing-machine"
 import { RealtimeService } from "../main"
@@ -70,7 +71,7 @@ const RiderMap = ({ order }: prop) => {
                 const longitude = pos.coords.longitude;
 
                 setRiderLocation([latitude, longitude])
-
+console.log("KEY:", import.meta.env.VITE_INTERNAL_SERVICE_KEY)
                 axios.post(`${RealtimeService}/api/v1/internal/emit`, {
                     event: "rider:location",
                     room: `user:${order.userId}`,
@@ -86,7 +87,7 @@ const RiderMap = ({ order }: prop) => {
                 {
                     enableHighAccuracy: true,
                     maximumAge: 5000,
-                    timeout: 1000
+                    timeout: 10000
                 }
             )
         }
