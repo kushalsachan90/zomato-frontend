@@ -18,13 +18,15 @@ const AdminDashboard = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             })
+              console.log(response.data.restaurant,"restaurant data")
             setRestaurant(response.data.restaurant,)
-      console.log(response,"hey hey")
+     
             const response2 = await api.get(`${AdminService}/api/admin/rider/pending`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             })
+            console.log(response2.data.rider,"response-rider")
             setrider(response2.data.rider)
         } catch (error) {
             console.log(error);
