@@ -10,7 +10,7 @@ import { SocketProvider } from './context/socketContext.tsx';
  export const authService='https://auth-service-wfk5.onrender.com'
  export const RestaurantService='https://restaurant-service-3-5ee2.onrender.com'
   export const UtilsService='https://util-service-61e1.onrender.com';
-  export const RealtimeService='https://realtime-service-8mp3.onrender.com';
+  export const RealtimeService='https://realtimes-service.onrender.com';
   export const RiderService='https://rider-service-qjlr.onrender.com';
     export const AdminService='https://admin-service-2v05.onrender.com';
 
